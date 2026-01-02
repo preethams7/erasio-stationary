@@ -1,0 +1,313 @@
+.popup-overlay {
+  /* This darkens the background */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-card {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px; /* Adjust size as needed */
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.google-sign-in {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 25px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+}
+
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.login-heading {
+  text-align: center;
+  margin: 15px 0 20px 0;
+  font-weight: 500;
+  color: #555;
+}
+
+.input-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.input-box {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Important for padding/width calculation */
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.forget-password {
+  align-self: flex-end;
+  color: #5b21aa; /* Purple color */
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #5b21aa; /* Purple background */
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+  background-color: #4a1c86;
+}
+
+.toggle-link {
+  text-align: center;
+  color: #5b21aa; /* Purple color */
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 500;
+}
+/* ... (Keep your existing CSS for popup-card, login-btn, etc.) ... */
+
+.tab-switcher {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-link {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-link.active {
+    color: #5b21aa; /* Your primary purple color */
+    border-bottom: 2px solid #5b21aa; 
+    font-weight: 600;
+}
+
+.error-message {
+    color: #d9534f; /* Red color for errors */
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: #fdd;
+    border-radius: 4px;
+}
+/* --- EXISTING STYLING (KEEP) --- */
+.popup-overlay {
+  /* ... (your existing overlay styles) ... */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-card {
+  /* ... (your existing card styles) ... */
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.close-btn {
+  /* ... (your existing close button styles) ... */
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-title {
+  /* ... (your existing title styles) ... */
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* --- ERROR MESSAGE --- */
+.error-message {
+    color: #d9534f;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: #fdd;
+    border-radius: 4px;
+}
+
+/* --- INPUTS & LABELS (KEEP) --- */
+.input-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.input-box {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* --- BUTTON STYLING (UPDATED WITH BLUE COLORS) --- */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 9999px; /* Rounded-full approximation */
+  
+  /* Blue-600 color */
+  background-color: #2563eb; 
+  color: white;
+  
+  font-size: 14px; /* text-sm */
+  font-weight: 500; /* font-medium */
+  cursor: pointer;
+  transition: background-color 0.2s; /* transition-colors duration-200 */
+}
+
+.login-btn:hover {
+  /* Blue-700 color */
+  background-color: #1d4ed8;
+}
+
+/* --- TAB SWITCHER STYLING (UPDATED WITH BLUE COLORS) --- */
+.tab-switcher {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-link {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-link.active {
+    /* Blue-600 color for active state */
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb; 
+    font-weight: 600;
+}
+
+/* --- TOGGLE LINK STYLING (UPDATED WITH BLUE COLORS) --- */
+.toggle-link {
+  text-align: center;
+  color: #2563eb; /* Blue-600 color */
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.toggle-link span {
+  /* Ensure the switch link is also blue */
+  color: #2563eb;
+}
+
+.forget-password {
+  align-self: flex-end;
+  color: #2563eb; /* Blue-600 color */
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
