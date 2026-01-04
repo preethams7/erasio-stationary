@@ -6,8 +6,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 //
 const AuthContext = createContext();
-
+console.log(AuthContext)
 export const AuthProvider = ({ children }) => {
+ 
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [accessToken, setAccessTokenState] = useState(getAccessToken());
@@ -43,7 +44,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
+        console.log("me api calling")
         const res = await axiosInstance.get("/me", { withCredentials: true });
+       
         setUser(res.data);
         if (res.data.accessToken) {
           setAccessTokenState(res.data.accessToken);

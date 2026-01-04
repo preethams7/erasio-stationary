@@ -86,11 +86,32 @@ const Sidebar = () => {
             <Link to="/admin/products/add" className="block p-2 rounded hover:bg-gray-700">
               Add Product
             </Link>
-            <Link to="/admin/products/categories" className="block p-2 rounded hover:bg-gray-700">
-              Categories
-            </Link>
+            
             <Link to="/admin/products/inventory" className="block p-2 rounded hover:bg-gray-700">
               Inventory / Stock
+            </Link>
+          </div>
+        )}
+<button
+          onClick={() => toggleMenu("categories")}
+          className="w-full flex items-center justify-between p-2 rounded hover:bg-gray-700"
+        >
+          <span className="flex items-center gap-3">
+            <FaBoxOpen /> Categories
+          </span>
+          <FaChevronDown
+            className={`transition-transform ${
+              openMenu === "categories" ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+        {openMenu === "categories" && (
+          <div className="ml-8 space-y-1 text-gray-300">
+            <Link to="/admin/categories" className="block p-2 rounded hover:bg-gray-700">
+              All Category
+            </Link>
+            <Link to="/admin/categories/add" className="block p-2 rounded hover:bg-gray-700">
+              Add Category
             </Link>
           </div>
         )}

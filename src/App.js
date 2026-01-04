@@ -22,6 +22,9 @@ import Orders from "./components/stationary/admin/pages/Orders";
 import Products from "./components/stationary/admin/pages/Products";
 import PageHome from "./components/stationary/admin/pages/PageHome";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CreateProduct from "./components/stationary/product/CreateProduct ";
+import ProductDetails from "./components/stationary/admin/pages/ProductDetails";
+import CreateCategory from "./components/stationary/admin/pages/CreateCategory";
 
 function App() {
   return (
@@ -29,7 +32,7 @@ function App() {
       {/* Public routes */}
       <Route path="/" element={<StationeryServicesHome />} />
       <Route path="/login" element={<Login />} />
-
+<Route path="/product/:productId" element={<ProductDetails />} />
       {/* Protected Admin routes */}
       <Route
         path="/admin"
@@ -43,6 +46,8 @@ function App() {
         <Route path="page-home" element={<PageHome />} />
         <Route path="orders" element={<Orders />} />
         <Route path="products" element={<Products />} />
+        <Route path="products/add" element={<CreateProduct />} />
+        <Route path="categories/add" element={<CreateCategory />} />
       </Route>
 
       {/* Redirect unknown routes */}

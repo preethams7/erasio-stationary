@@ -1,136 +1,120 @@
-import React, { useState } from "react";
-import Navbar from "../Navbar";
+import React, { useEffect, useState } from "react";
+import AdminNavbar from "../admin/layout/AdminNavbar";
+import axiosInstance from "../../context/axiosInstance";
+
 
 const CreateProduct = () => {
   const [product, setProduct] = useState({
     name: "",
+    brand: "",
+    category: "",
     price: "",
+    discountPrice: "",
+    stock: "",
     description: "",
-    image: null,
-    imagePreview: null,
+    attributes: [{ key: "", value: "" }],
+    images: [],
   });
 
+  useEffect(()=>{
+    const handledropdown=async()=>{
+     const categories=await axiosInstance.get("/category/");
+     console.log(categories)
+    }
+    handledropdown();
+  })
+  // Handle text inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+  // Handle attributes
+  const handleAttributeChange = (index, field, value) => {
+    const updated = [...product.attributes];
+    updated[index][field] = value;
+    setProduct({ ...product, attributes: updated });
+  };
 
+  const addAttribute = () => {
     setProduct({
       ...product,
-      image: file,
-      imagePreview: URL.createObjectURL(file),
+      attributes: [...product.attributes, { key: "", value: "" }],
     });
+  };
+
+  // Handle images
+  const handleImageChange = (e) => {
+    setProduct({ ...product, images: [...e.target.files] });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Later you can send this to backend using FormData
-    console.log("Product Data:", product);
-
-    alert("Product created successfully!");
-
-    // Reset form
-    setProduct({
-      name: "",
-      price: "",
-      description: "",
-      image: null,
-      imagePreview: null,
+    // FormData for backend
+    const formData = new FormData();
+    Object.keys(product).forEach((key) => {
+      if (key === "attributes") {
+        formData.append(key, JSON.stringify(product.attributes));
+      } else if (key === "images") {
+        product.images.forEach((img) => formData.append("images", img));
+      } else {
+        formData.append(key, product[key]);
+      }
     });
+
+    console.log("Submitting product:", product);
+    alert("Product ready to be sent to backend 🚀");
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
+    <div className="min-h-screen bg-gray-100">
+    
+      <div className="max-w-4xl mx-auto mt-8 bg-white p-6 rounded shadow">
+        <h2 className="text-2xl font-bold mb-6">Create Product</h2>
 
-      <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          Create New Product
-        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input name="name" placeholder="Product Name" onChange={handleChange} className="w-full border p-2" required />
+          <input name="brand" placeholder="Brand" onChange={handleChange} className="w-full border p-2" required />
+          <input name="category" placeholder="Category" onChange={handleChange} className="w-full border p-2" required />
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Product Name */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Product Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={product.name}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="Enter product name"
-            />
+          <div className="grid grid-cols-2 gap-4">
+            <input name="price" type="number" placeholder="Price" onChange={handleChange} className="border p-2" required />
+            <input name="discountPrice" type="number" placeholder="Discount Price" onChange={handleChange} className="border p-2" />
           </div>
 
-          {/* Price */}
+          <input name="stock" type="number" placeholder="Stock Quantity" onChange={handleChange} className="w-full border p-2" required />
+
+          <textarea name="description" placeholder="Product Description" onChange={handleChange} className="w-full border p-2" rows="4" />
+
+          {/* Attributes */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Price (₹)
-            </label>
-            <input
-              type="number"
-              name="price"
-              value={product.price}
-              onChange={handleChange}
-              required
-              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="Enter price"
-            />
+            <h4 className="font-semibold mb-2">Attributes</h4>
+            {product.attributes.map((attr, index) => (
+              <div key={index} className="flex gap-2 mb-2">
+                <input
+                  placeholder="Key (e.g. Color)"
+                  value={attr.key}
+                  onChange={(e) => handleAttributeChange(index, "key", e.target.value)}
+                  className="border p-2 w-1/2"
+                />
+                <input
+                  placeholder="Value (e.g. Black)"
+                  value={attr.value}
+                  onChange={(e) => handleAttributeChange(index, "value", e.target.value)}
+                  className="border p-2 w-1/2"
+                />
+              </div>
+            ))}
+            <button type="button" onClick={addAttribute} className="text-blue-600 text-sm">
+              + Add Attribute
+            </button>
           </div>
 
-          {/* Description */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Description
-            </label>
-            <textarea
-              name="description"
-              value={product.description}
-              onChange={handleChange}
-              rows="3"
-              className="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              placeholder="Enter product description"
-            />
-          </div>
+          {/* Images */}
+          <input type="file" multiple onChange={handleImageChange} />
 
-          {/* Image Upload */}
-          <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1">
-              Product Image
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="w-full"
-            />
-          </div>
-
-          {/* Image Preview */}
-          {product.imagePreview && (
-            <div className="mt-4">
-              <p className="text-sm text-gray-600 mb-2">Image Preview</p>
-              <img
-                src={product.imagePreview}
-                alt="Preview"
-                className="w-40 h-40 object-cover rounded-md border"
-              />
-            </div>
-          )}
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors"
-          >
+          <button className="w-full bg-blue-600 text-white py-2 rounded">
             Create Product
           </button>
         </form>

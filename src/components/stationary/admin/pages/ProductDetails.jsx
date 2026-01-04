@@ -7,8 +7,9 @@ import { FaArrowLeft } from "react-icons/fa";
 
 const ProductDetails = () => {
   const { productId } = useParams();
+  console.log(productId)
   const navigate = useNavigate();
-  const product = dummyProducts.find(p => p.id === parseInt(productId));
+  const product = dummyProducts.find(p => p.id == parseInt(productId));
 
   const [quantity, setQuantity] = useState(1);
 
